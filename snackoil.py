@@ -3,13 +3,12 @@
 # Date: Saturday, May 20th - 2017.
 # License: MIT License.
 #
-# Tiny modification by Cyberpanda for @snackoil on twitter.
-
+# Tiny modifications by Cyberpanda for @snackoil on twitter.
 import tweepy
 from time import sleep
 import sched, time
+import os
 
-# Nope I don't share tokens neither keys :P
 consumer_key = 'xxxxxxxx'
 consumer_secret = 'xxxxxxxx'
 access_token = 'xxxxxxxx'
@@ -41,12 +40,19 @@ def autoFollow():
         
 def main(sc):
     try:
-        retweet(20)
+        print("# "*10+"Retweet"+" #"*10)
+        retweet(5)
+        print("# "*10+"AutoFollow"+" #"*10)
         autoFollow()
     except tweepy.TweepError:
         pass
-    s.enter(5, 1, main, (sc,))
+    s.enter(20, 1, main, (sc,))
 
 if __name__ == '__main__':
-    s.enter(5, 1, main, (s,))
+    for i in range(0, 11):
+        os.system("clear" if os.name != "nt" else "cls")
+        print(f"Brewing snakeoil.. {'🐍'*i} {i*10}%")
+        sleep(0.5)
+    print("OH YEAH, LET'S ROCK THIS!")
+    s.enter(8, 1, main, (s,))
     s.run()
